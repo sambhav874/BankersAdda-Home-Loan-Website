@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { auth, provider } from '../../firebase/firebase';
 import { signInWithPopup, createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import toast from 'react-hot-toast';
+import Link from 'next/link';
 
 const Register = () => {
   const router = useRouter();
@@ -150,6 +151,9 @@ const Register = () => {
           >
             Register with Google
           </button>
+        </div>
+        <div className='flex justify-center'>
+          <p className=" text-center mx-2  text-gray-600">Existing Account ? </p><Link className='text-black' href={'/login'}> Click here .</Link>
         </div>
       </div>
     </div>
