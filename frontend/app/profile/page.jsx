@@ -4,6 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../firebase/firebase';
 import toast from 'react-hot-toast';
 import EditableImage from '../../components/layout/EditableImage';
+import AdminTabs from './../../components/layout/AdminTabs'
 
 const Profile = () => {
   const [user, loading, error] = useAuthState(auth);
@@ -14,8 +15,30 @@ const Profile = () => {
   const [pincode, setPincode] = useState("");
   const [country, setCountry] = useState("");
   const [image, setImage] = useState('');
+  const [isAdmin , setIsAdmin] = useState(false);
   
   const [profileFetched, setProfileFetched] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      // Fetch isAdmin status from API
+      fetch(`/api/isAdmin`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: user.email }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          setIsAdmin(data.isAdmin); // Set isAdmin state based on API response
+        })
+        .catch(error => {
+          console.error("Error fetching isAdmin data:", error);
+        });
+
+    }
+  }, [user]);
 
   useEffect(() => {
     if (user) {
@@ -94,6 +117,7 @@ const Profile = () => {
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="max-w-md w-full mx-auto bg-white shadow-md rounded-lg p-8">
+        <AdminTabs  isAdmin={isAdmin} />
         <div className="flex flex-col items-center">
           <EditableImage link={image} setLink={setImage} />
           <form className="mt-4 w-full" onSubmit={handleProfileInfoUpdate}>

@@ -1,6 +1,8 @@
-'use client'
+// SessionDetails.js
+
+'use client';
 import React, { useEffect, useState } from 'react';
-import { jwtDecode } from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode'; // Correct import statement
 import Link from 'next/link';
 
 const SessionDetails = () => {
@@ -28,7 +30,6 @@ const SessionDetails = () => {
   }
 
   const { name, email, loginMethod } = user;
-  console.log(name , email , loginMethod)
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
