@@ -1,9 +1,35 @@
+'use client'
 import Image from 'next/image';
 import Link from 'next/link';
+import Carousel from './../components/layout/Carousel';
+import React, { useEffect, useState } from 'react';
 
 export default function Home() {
+
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    const fetchCarouselImages = async () => {
+      try {
+        const response = await fetch('/api/carousel');
+        if (!response.ok) {
+          throw new Error('Failed to fetch carousel images');
+        }
+        const data = await response.json();
+        
+        setImages(data); 
+      } catch (error) {
+        console.error('Error fetching carousel images:', error);
+        
+      }
+    };
+
+    fetchCarouselImages();
+  }, []);
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-8 bg-gray-50">
+      <Carousel images={images} />
       <section className="text-center mt-12">
         <h2 className="text-3xl font-bold mb-6">Welcome to Grow More Loan</h2>
         <p className="text-lg mb-8">Your trusted partner for all types of loans</p>
