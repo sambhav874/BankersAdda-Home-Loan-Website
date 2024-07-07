@@ -21,6 +21,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gray-50">
+      <div className='text-[150px]'> Hello</div>
       <Carousel images={images} />
       
       <section className="px-8 py-12 text-center">

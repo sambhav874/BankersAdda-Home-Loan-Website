@@ -1,50 +1,27 @@
-'use client';
-import { auth } from './../../firebase/firebase';
-import React, { useEffect, useState } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
+'use client'
+import React, { useEffect } from 'react';
+import { useProfile } from './../../components/useProfile';
 
 const CheckAdminStatus = () => {
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [user, loading, error] = useAuthState(auth);
+  const { loading, data, error } = useProfile();
 
   useEffect(() => {
-    if (user && user.email) {
-      const fetchAdminStatus = async () => {
-        try {
-          const response = await fetch('/api/isAdmin', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email: user.email }) // Send email in body
-          });
-
-          if (!response.ok) {
-            throw new Error('Failed to fetch admin status');
-          }
-
-          const data = await response.json();
-          setIsAdmin(data.isAdmin);
-        } catch (error) {
-          console.error('Error checking admin status:', error);
-        }
-      };
-
-      fetchAdminStatus();
+    if (error) {
+      console.error('Error fetching profile data:', error);
     }
-  }, [user]);
+  }, [error]);
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
+  if (error || !data) {
+    return <div>Error: Unable to fetch profile data</div>;
   }
 
   return (
     <div>
-      {user?.email && (isAdmin ? 'User is an admin' : 'User is not an admin')}
+      {data.isAdmin ? 'User is an admin' : 'User is not an admin'}
     </div>
   );
 };
