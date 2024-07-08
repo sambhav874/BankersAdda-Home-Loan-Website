@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from './../components/navbar/page'
 import { Toaster } from "react-hot-toast";
+import { AppProvider } from "./../components/AppContext"
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,16 +14,20 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
+  children, 
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
     <html lang="en">
+      <AppProvider>
+      
       <body className={inter.className}>
       <Toaster position="top-right" reverseOrder={false} />
         <Navbar />
         {children}</body>
+        </AppProvider>
     </html>
   );
 }
