@@ -44,14 +44,18 @@ export async function POST(req) {
     }
 }
 
-export async function GET(){
-    await mongoose.connect(process.env.MONGO_URI)
-
+export default async function GET(req, res) {
     try {
-        const que = await Queries.find();
-        return Response.json(que);
-      } catch (error) {
-        console.error("Error fetching loans:", error);
-        return Response.json({ error: "An error occurred fetching the loans" }, { status: 500 });
-      }
+        // Connect to MongoDB
+        await mongoose.connect(process.env.MONGO_URI);
+
+        // Fetch all queries
+        const queries = await Queries.find();
+
+        // Respond with the queries array
+        return Response.json(queries);
+    } catch (error) {
+        console.error("Error fetching queries:", error);
+        return Response.json({ error: 'An error occurred fetching queries' });
+    }
 }
