@@ -41,28 +41,26 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-gray-50">
-      <div className='text-[150px]'> Hello</div>
+    <main className="min-h-screen bg-gray-50 flex flex-col items-center">
+      <div className='text-[75px] font-extralight'>Grow More Loans</div>
       <Carousel images={images} />
+      
 
       <section className="px-8 py-12 text-center">
-        <h2 className="text-3xl font-bold mb-6">Welcome to Grow More Loan</h2>
-        <p className="text-lg mb-8">Your trusted partner for all types of loans</p>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {loans.map((loan) => (
-            <LoanCard key={loan._id} loan={loan} />
-          ))}
-        </div>
-      </section>
+  <h2 className="text-3xl font-bold mb-6">Welcome to Grow More Loan</h2>
+  <p className="text-lg mb-8">Your trusted partner for all types of loans</p>
+  
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+    {loans.map((loan) => (
+      <LoanCard key={loan._id} loan={loan} />
+    ))}
+  </div>
+</section>
+
       
       <Rend /> {/* Render the Rend component */}
 
-      <footer className="bg-blue-600 text-white py-4">
-        <div className="text-center">
-          &copy; {new Date().getFullYear()} Grow More Loan. All rights reserved.
-        </div>
-      </footer>
+  
     </main>
   );
 }

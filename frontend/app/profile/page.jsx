@@ -1,13 +1,12 @@
-'use client'
+'use client';
 import React, { useEffect, useState } from "react";
-import { auth } from '../../firebase/firebase';
+import { useSession } from "next-auth/react";
 import toast from 'react-hot-toast';
 import EditableImage from '../../components/layout/EditableImage';
 import AdminTabs from './../../components/layout/AdminTabs'
-import { useProfile } from "../../components/useProfile";
 
 const Profile = () => {
-  const { data: profileData } = useProfile();
+  const { data: session, status } = useSession();
   const [userName, setUserName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
@@ -16,43 +15,22 @@ const Profile = () => {
   const [country, setCountry] = useState("");
   const [image, setImage] = useState('');
   const [isAdmin , setIsAdmin] = useState(false);
-  
   const [profileFetched, setProfileFetched] = useState(false);
-  console.log(profileData);
 
   useEffect(() => {
-    if (profileData) {
-      // Fetch isAdmin status from API
-      fetch(`/api/isAdmin`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email: profileData.email }),
-      })
+    if (status === 'authenticated' && session) {
+      setUserName(session.user.name || "");
+      setImage(session.user.image || "");
+      fetch('/api/profile')
         .then(response => response.json())
         .then(data => {
-          setIsAdmin(data.isAdmin); // Set isAdmin state based on API response
-        })
-        .catch(error => {
-          console.error("Error fetching isAdmin data:", error);
-        });
-
-    }
-  }, [profileData]);
-
-  useEffect(() => {
-    if (profileData) {
-      fetch(`/api/profile?email=${profileData.email}`)
-        .then(response => response.json())
-        .then(data => {
-
           setImage(data.image || "");
           setUserName(data.name || "");
           setPhoneNumber(data.phoneNumber || "");
           setCity(data.city || "");
           setPincode(data.pincode || "");
           setCountry(data.country || "");
+          setIsAdmin(data.admin);
           setStreetAddress(data.streetAddress || "");
           setProfileFetched(true);
         })
@@ -60,7 +38,7 @@ const Profile = () => {
           console.error("Error fetching profile data:", error);
         });
     }
-  }, [profileData]);
+  }, [session , status]);
 
   async function handleProfileInfoUpdate(ev) {
     ev.preventDefault();
@@ -68,17 +46,14 @@ const Profile = () => {
 
     const savingPromise = new Promise(async (resolve, reject) => {
       try {
-        const idToken = await auth.currentUser.getIdToken();
         const response = await fetch('/api/profile', {
           method: 'PUT',
           headers: { 
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${idToken}` // Include Firebase ID token in headers
           },
           body: JSON.stringify({ 
-            email: profileData.email, // Include user email in the body
             name: userName, 
-            image: image, 
+            image, 
             streetAddress, 
             phoneNumber, 
             city, 
@@ -103,10 +78,11 @@ const Profile = () => {
     });
   }
 
-  if (!profileData) {
-    // Redirect to login or handle unauthenticated state
-    // Ensure you have the necessary routing setup
-    return null;
+  if (status === "loading" || !profileFetched) {
+    return "Loading...";
+  }
+  if (status === "unauthenticated") {
+    return redirect("/login");
   }
 
   return (
@@ -134,7 +110,7 @@ const Profile = () => {
                 type="email"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 disabled={true}
-                value={profileData.email}
+                value={session?.user?.email}
               />
             </div>
             <div className="mb-4">

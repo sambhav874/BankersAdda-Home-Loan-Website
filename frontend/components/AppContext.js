@@ -50,20 +50,10 @@ export function AppProvider({children}){
         }
     } , [])
 
-    async function fetchProducts() {
-        fetch('/api/store-items')
-      .then(res => res.json())
-      .then(items => {
-        // Filter items with category 'Women'
-        
-        setProducts(items)// Assuming you want the latest 5 items
-      });
-        
-      }
     
-      useEffect(() => {
-        fetchProducts(); // Fetch products when component mounts
-      }, []);
+        
+      
+    
     
     function addToCart(product, size=null, ) {
         setCartProducts(prevProducts => {

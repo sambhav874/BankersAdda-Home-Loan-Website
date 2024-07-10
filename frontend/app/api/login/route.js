@@ -27,9 +27,6 @@ export async function POST(req) {
       });
     }
 
-    // Generate JWT
-    const token = jwt.sign({ userId: user._id ,  name: user.name, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
     // Return token and user data
     return new Response(JSON.stringify({ message: 'Login successful', token, user }), {
       status: 200,

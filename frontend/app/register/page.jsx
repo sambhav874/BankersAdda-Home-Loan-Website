@@ -1,9 +1,8 @@
-// pages/register.jsx
 'use client'
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { signIn } from 'next-auth/react';
 import toast from 'react-hot-toast';
+import { signIn } from 'next-auth/react';
 
 const Register = () => {
     const [name, setName] = useState('');
@@ -20,13 +19,13 @@ const Register = () => {
         setUserCreated(false);
 
         try {
-            const result = await signIn('email', {
-                email,
-                password,
-                callbackUrl: '/',
+            const response = await fetch('/api/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, password })
             });
 
-            if (result.error) {
+            if (!response.ok) {
                 throw new Error('Failed to register');
             }
 

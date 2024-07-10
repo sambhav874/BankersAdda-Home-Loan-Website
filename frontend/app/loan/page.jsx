@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import EditableImage from '../../components/layout/EditableImage';
+import { useProfile } from '@/components/useProfile';
+import AdminTabs from '@/components/layout/AdminTabs';
 
 const CreateLoan = () => {
   const [name, setName] = useState('');
@@ -90,8 +92,20 @@ const CreateLoan = () => {
     }
   };
 
-  return (
+  const { data } = useProfile();
+
+  if (loading) {
+    return "Loading user info.....";
+  }
+
+  if (!data.admin) {
+    return "Not an admin.";
+  }
+
+  return (<>
+    <AdminTabs isAdmin={data.admin} />
     <div className="min-h-screen flex items-center justify-center bg-slate-900 py-12 px-4 sm:px-6 lg:px-8">
+      
       <div className="max-w-screen-md w-full space-y-8 bg-slate-300 p-8 rounded-lg">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -168,6 +182,7 @@ const CreateLoan = () => {
         ))}
       </div>
     </div>
+    </>
   );
 };
 

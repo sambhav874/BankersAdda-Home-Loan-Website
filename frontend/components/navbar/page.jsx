@@ -1,186 +1,211 @@
-'use client'
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../../firebase/firebase';
+"use client";
+import React, { useContext, useEffect, useState } from "react";
+import Link from "next/link";
+import { useSession, signIn, signOut } from "next-auth/react";
+import { CartContext } from "../AppContext";
+import ShoppingCart from './../icons/ShoppingCart';
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [user] = useAuthState(auth);
+  const { data: session, status } = useSession();
+  const { cartProducts } = useContext(CartContext);
+  const { products } = useContext(CartContext);
+  console.log(products); // Access products from context
+  const userData = session?.user;
+  let userName = userData?.name || userData?.email;
+  if (userName && userName.includes(" ")) {
+    userName = userName.split(" ")[0];
+  }
 
-  const handleSignOut = async () => {
-    try {
-      await auth.signOut();
-      // Optionally redirect or perform additional actions after sign-out
-    } catch (error) {
-      console.error('Sign out error:', error.message);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsLargeScreen(window.innerWidth >= 768);
+
+      const handleResize = () => {
+        setIsLargeScreen(window.innerWidth >= 768);
+        setIsSidebarOpen(false);
+        setIsDropdownOpen(false);
+      };
+
+      window.addEventListener("resize", handleResize);
+
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
     }
+  }, []);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleLinkClick = () => {
+    setIsSidebarOpen(false);
+    setIsDropdownOpen(false);
   };
 
   return (
-    <nav className="bg-white shadow-lg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex-shrink-0 flex items-center">
-            <Link href="/">
-              <span className="text-2xl font-bold text-blue-600 cursor-pointer">Grow More Loan</span>
+    <div className="bg-white shadow-lg p-4 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div className="hidden md:flex space-x-6">
+        <Link href="/" className="text-gray-700 hover:text-indigo-500 font-medium">
+          Home
+        </Link>
+        <Link href="/about-us" className="text-gray-700 hover:text-indigo-500 font-medium">
+          About Us
+        </Link>
+        <Link href="/news" className="text-gray-700 hover:text-indigo-500 font-medium">
+          News
+        </Link>
+        <Link href="/loan-apply" className="text-gray-700 hover:text-indigo-500 font-medium">
+          Apply Loan
+        </Link>
+        <Link href="/tools/emi-calculator" className="text-gray-700 hover:text-indigo-500 font-medium">
+          EMI Calculator
+        </Link>
+        <Link
+              href="/query"
+              className="block text-gray-700 hover:text-indigo-500 font-medium"
+              onClick={handleLinkClick}
+            >
+              Contact Us 
             </Link>
-          </div>
-          <div className="hidden sm:flex sm:items-center sm:space-x-4">
-            <Link href="/" className="text-gray-700 hover:text-blue-500 cursor-pointer">
-              Home
-            </Link>
-            <Link href="/about" className="text-gray-700 hover:text-blue-500 cursor-pointer">
-              About us
-            </Link>
-            <Link href="/blogs" className="text-gray-700 hover:text-blue-500 cursor-pointer">
-              Blogs
-            </Link>
-            <Link href="/loan-apply" className="text-gray-700 hover:text-blue-500 cursor-pointer">
-              Loan Apply
-            </Link>
-            <div className="relative group">
-              <span className="text-gray-700 hover:text-blue-500 cursor-pointer">Tools</span>
-              <div className="absolute hidden group-hover:block bg-white shadow-lg py-2">
-                <Link
-                  href="/tools/tool1"
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer"
-                >
-                  Tool 1
-                </Link>
-                <Link
-                  href="/tools/tool2"
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer"
-                >
-                  Tool 2
-                </Link>
-              </div>
-            </div>
-            <Link href="/contact" className="text-gray-700 hover:text-blue-500 cursor-pointer">
-              Contact Us
-            </Link>
-          </div>
-          <div className="flex items-center">
-            {user ? (
-              <div className="relative">
-                <button
-                  onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className="flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-500 focus:outline-none"
-                >
-                  <span className="mr-2">{user.displayName}</span>
-                  <svg
-                    className="h-6 w-6"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
+        <Link href="/cart" className="relative text-gray-700 hover:text-indigo-500 font-medium">
+          <ShoppingCart />
+          {cartProducts.length > 0 && (
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full p-1">
+              {cartProducts.length}
+            </span>
+          )}
+        </Link>
+      </div>
+
+      <div className="flex items-center space-x-4">
+        {status === "authenticated" ? (
+          <div className="relative">
+            <button
+              onClick={toggleDropdown}
+              className="text-gray-700 hover:text-indigo-500 font-medium"
+            >
+              {userName}
+            </button>
+            {isDropdownOpen && (
+              <ul className="absolute top-full right-0 mt-2 w-40 bg-white border-gray-200 rounded-lg shadow-lg z-10">
+                <li>
+                  <button
+                    onClick={() => signOut()}
+                    className="block w-full py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
                   >
-                    {isMenuOpen ? (
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    ) : (
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
-                    )}
-                  </svg>
-                </button>
-                {isMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2">
-                    <Link
-                      href="/profile"
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer"
-                    >
-                      Profile
-                    </Link>
-                    <button
-                      onClick={handleSignOut}
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer w-full text-left"
-                    >
-                      Sign out
-                    </button>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <Link href="/register" className="text-gray-700 hover:text-blue-500 cursor-pointer">
-                Sign in
-              </Link>
+                    Logout
+                  </button>
+                </li>
+                <li>
+                  <Link
+                    href={'/profile'}
+                    className="block w-full py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Profile
+                  </Link>
+                </li>
+              </ul>
             )}
           </div>
-          <div className="-mr-2 flex sm:hidden">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-500 focus:outline-none"
-            >
-              <svg
-                className="h-6 w-6"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                {isMenuOpen ? (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
-                )}
-              </svg>
-            </button>
-          </div>
-        </div>
+        ) : (
+          <Link href="/login" className="text-gray-700 hover:text-indigo-500 font-medium">
+            Login
+          </Link>
+        )}
       </div>
-      {isMenuOpen && (
-        <div className="sm:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            <Link href="/" className="block text-gray-700 hover:text-blue-500 cursor-pointer">
+
+      {/* Mobile Sidebar Button */}
+      <button
+        className="md:hidden text-gray-700 hover:text-indigo-500 font-medium"
+        onClick={toggleSidebar}
+      >
+        ☰
+      </button>
+
+      {/* Mobile Sidebar */}
+      {isSidebarOpen && (
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex flex-col items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg space-y-4 relative w-4/5 max-w-sm mx-auto">
+            <button
+              onClick={toggleSidebar}
+              className="absolute top-2 right-2 text-gray-700 hover:text-indigo-500 font-medium"
+            >
+              &times;
+            </button>
+            <Link
+              href="/"
+              className="block text-gray-700 hover:text-indigo-500 font-medium"
+              onClick={handleLinkClick}
+            >
               Home
             </Link>
-            <Link href="/about" className="block text-gray-700 hover:text-blue-500 cursor-pointer">
-              About us
+            <Link
+              href="/about-us"
+              className="block text-gray-700 hover:text-indigo-500 font-medium"
+              onClick={handleLinkClick}
+            >
+              About Us
             </Link>
-            <Link href="/blogs" className="block text-gray-700 hover:text-blue-500 cursor-pointer">
-              Blogs
+            <Link
+              href="/news"
+              className="block text-gray-700 hover:text-indigo-500 font-medium"
+              onClick={handleLinkClick}
+            >
+              News
             </Link>
-            <Link href="/loan-apply" className="block text-gray-700 hover:text-blue-500 cursor-pointer">
-              Loan Apply
+            <Link
+              href="/loan-apply"
+              className="block text-gray-700 hover:text-indigo-500 font-medium"
+              onClick={handleLinkClick}
+            >
+              Apply Loan
             </Link>
-            <div className="relative">
-              <span className="block text-gray-700 hover:text-blue-500 cursor-pointer">Tools</span>
-              <div className="bg-white shadow-lg py-2">
-                <Link
-                  href="/tools/tool1"
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer"
-                >
-                  Tool 1
-                </Link>
-                <Link
-                  href="/tools/tool2"
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer"
-                >
-                  Tool 2
-                </Link>
-              </div>
-            </div>
-            <Link href="/contact" className="block text-gray-700 hover:text-blue-500 cursor-pointer">
+            <Link
+              href="/tools/emi-calculator"
+              className="block text-gray-700 hover:text-indigo-500 font-medium"
+              onClick={handleLinkClick}
+            >
+              EMI Calculator
+            </Link>
+            <Link
+              href="/query"
+              className="block text-gray-700 hover:text-indigo-500 font-medium"
+              onClick={handleLinkClick}
+            >
               Contact Us
             </Link>
-            <Link href="/register" className="block text-gray-700 hover:text-blue-500 cursor-pointer">
-              Sign in
+            <Link
+              href="/cart"
+              className="block text-gray-700 hover:text-indigo-500 font-medium"
+              onClick={handleLinkClick}
+            >
+              Cart
+              {cartProducts.length > 0 && (
+                <span className="relative ml-2 bg-red-500 text-white text-xs rounded-full p-1">
+                  {cartProducts.length}
+                </span>
+              )}
+            </Link>
+            <Link
+              href="/login"
+              className="block text-gray-700 hover:text-indigo-500 font-medium"
+              onClick={handleLinkClick}
+            >
+              Login
             </Link>
           </div>
         </div>
       )}
-    </nav>
+    </div>
   );
 };
 

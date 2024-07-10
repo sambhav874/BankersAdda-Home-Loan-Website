@@ -3,40 +3,54 @@ import { User } from '../../../../models/User';
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "../../../../libs/mongoConnect";
 import GoogleProvider from 'next-auth/providers/google';
-import EmailProvider from 'next-auth/providers/email';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import bcrypt from 'bcryptjs';
 
 export const authOptions = {
-  secret: process.env.SECRET,
+  session :{strategy: 'jwt',},
+  secret: process.env.GS_SECRET,
   adapter: MongoDBAdapter(clientPromise),
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_SECRET,
     }),
-    EmailProvider({
-      server: process.env.MAIL_SERVER,
-      from: 'NextAuth.js <no-reply@example.com>'
-    }), 
-    {
-      async authorize(credentials) {
-        const email = credentials?.email;
-        const password = credentials?.password;
+    CredentialsProvider({
+      id: 'credentials',
+      name: 'Credentials',
+      credentials: {
+        username: { label: "Username", type: "text" },
+        password: { label: "Password", type: "password" }
+      },
+      authorize: async (credentials) => {
+        const email = credentials.username;
+        const password = credentials.password;
 
-        if (!email || !password) {
-          return null;
+        console.log(email , password)
+
+        
+
+        try {
+          await mongoose.connect(process.env.MONGO_URI);
+          const user = await User.findOne({ email });
+
+          console.log(user)
+
+          if (user && bcrypt.compareSync(password, user.password)) {
+            return user;
+          } else {
+            throw new Error('Invalid credentials');
+          }
+        } catch (error) {
+          console.error('MongoDB connection or user lookup error:', error);
+          throw new Error('Authentication failed');
         }
-
-        await mongoose.connect(process.env.MONGO_URI);
-        const user = await User.findOne({ email });
-
-        if (user && (password === user.password)) {
-          return user;
-        }
-
-        return null;
       }
-    }
+    }),
   ],
+  pages: {
+    signIn: '/auth/signin',
+  },
 };
 
 export default authOptions;

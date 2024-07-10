@@ -1,38 +1,31 @@
-
-import {User} from './../../../models/User';
-import bcrypt from 'bcryptjs';
 import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
+import { User } from './../../../models/User';
 
-
-export async function  POST(req, res) {
-  
-    mongoose.connect(process.env.MONGO_URI)
-    const body = await req.json();
-    const name = body.name
-    const password = body.password
-    const email = body.email
-
+export async function POST(req, res) {
     try {
-      // Check if user already exists
-      const existingUser = await User.findOne({ email });
-      if (existingUser) {
-        return Response.json({ message: 'User already exists' });
-      }
+        await mongoose.connect(process.env.MONGO_URI);
 
-      console.log(name , email , password)
-      const notHashedPassword = password;
+        const body = await req.json();
+        const { name, email, password } = body;
 
-      // Hash the password
-      const salt = bcrypt.genSaltSync(10);
-      body.password = bcrypt.hashSync(notHashedPassword, salt);
+        // Check if user already exists
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return Response.json({ message: 'User already exists' });
+        }
 
-      // Create new user
-      const newUser = await User.create(body);
-      console.log(newUser);
-     return Response.json(newUser);
+        // Hash the password
+        const salt = bcrypt.genSaltSync(10);
+        const hashedPassword = bcrypt.hashSync(password, salt);
 
+        // Create new user
+        const newUser = new User({ name, email, password: hashedPassword });
+        await newUser.save();
+
+        return Response.json({ message: 'User created successfully' });
     } catch (error) {
-      return  Response.json({ message: 'Server error' });
+        console.error('Server error:', error);
+        return Response.json({ message: 'Server error' });
     }
-  
 }

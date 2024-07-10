@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <AppProvider>
       
-      <body className={inter.className}>
+      <body className={inter.className} >
       <Toaster position="top-right" reverseOrder={false} />
         <Navbar />
         {children}</body>

@@ -2,7 +2,7 @@ import React from 'react';
 
 function Rend() {
   return (
-    <div className="bg-slate-700 min-h-screen">
+    <div className="bg-slate-700 ">
       <header className="bg-gray-800 text-white py-8">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap items-center">
@@ -19,11 +19,7 @@ function Rend() {
         </div>
       </header>
 
-      <footer className="bg-blue-600 text-white py-4">
-        <div className="text-center">
-          &copy; {new Date().getFullYear()} Grow More Loan. All rights reserved.
-        </div>
-      </footer>
+      
     </div>
   );
 }
