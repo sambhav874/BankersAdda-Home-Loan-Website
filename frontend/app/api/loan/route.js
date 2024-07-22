@@ -1,5 +1,8 @@
-import { Loan } from "../../../models/LoanSchema";
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
+import { getServerSession } from 'next-auth';
+import { Loan } from '../../../models/LoanSchema';
+import { isAdmin } from '../auth/[...nextauth]/utils/isAdmin';
+import { authOptions } from '../auth/[...nextauth]/auth';
 
 export async function POST(req) {
   await mongoose.connect(process.env.MONGO_URI);
@@ -15,12 +18,37 @@ export async function POST(req) {
   }
 }
 
-export async function GET() {
+export async function GET(req) {
   await mongoose.connect(process.env.MONGO_URI);
 
   try {
-    const loans = await Loan.find();
-    return Response.json(loans);
+    const session = await getServerSession(authOptions);
+    const userEmail = session?.user?.email;
+    const admin = await isAdmin(session?.user);
+
+    const url = new URL(req.url);
+    const _id = url.searchParams.get('_id');
+
+    if (_id) {
+      const loan = await Loan.findById(_id);
+      return Response.json(loan);
+    }
+    if(!_id){
+      const loans = await Loan.find();
+      return Response.json(loans);
+    }
+
+    if (admin) {
+      const loans = await Loan.find();
+      return Response.json(loans);
+    }
+
+    if (userEmail) {
+      const loans = await Loan.find({ userEmail });
+      return Response.json(loans);
+    }
+
+    return Response.json({ error: "Unauthorized access" }, { status: 403 });
   } catch (error) {
     console.error("Error fetching loans:", error);
     return Response.json({ error: "An error occurred fetching the loans" }, { status: 500 });
