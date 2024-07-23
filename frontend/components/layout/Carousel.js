@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useState, useEffect } from 'react';
 
 const Carousel = ({ images }) => {
@@ -31,20 +31,43 @@ const Carousel = ({ images }) => {
   }
 
   return (
-    <div className="relative w-[90%] z-0">
+    <div className="relative w-full max-w-7xl p-2 mx-auto overflow-hidden rounded-lg shadow-lg bg-white">
       {/* Carousel wrapper */}
-      <div className="relative h-96 overflow-hidden rounded-lg z-0">
+      <div className="relative h-[60vh] md:h-[80vh] overflow-hidden rounded-lg">
         {images.map((slide, index) => (
-          <div key={index} className={`carousel-item ${index === currentSlide ? 'block' : 'hidden'}`}>
-            <img src={slide} className="absolute inset-0 w-full h-full object-cover" alt={`Slide ${index + 1}`} />
+          <div key={index} className={`absolute inset-0 transition-opacity duration-700 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}>
+            <img src={slide} className="w-full h-full object-cover" alt={`Slide ${index + 1}`} />
           </div>
         ))}
       </div>
       {/* Slider controls */}
       {totalSlides > 1 && (
         <>
-          <button className="absolute top-1/2 left-4 z-10 transform -translate-y-1/2 -translate-x-1/2 focus:outline-none border-none" onClick={prevSlide}>&#10094;</button>
-          <button className="absolute top-1/2 right-4 z-10 transform -translate-y-1/2 translate-x-1/2 focus:outline-none border-none" onClick={nextSlide}>&#10095;</button>
+          <button
+            className="absolute top-1/2 left-4 z-10 transform -translate-y-1/2 text-white text-3xl bg-gray-800 bg-opacity-50 rounded-full p-2 hover:bg-opacity-75 focus:outline-none"
+            onClick={prevSlide}
+            aria-label="Previous slide"
+          >
+            &#10094;
+          </button>
+          <button
+            className="absolute top-1/2 right-4 z-10 transform -translate-y-1/2 text-white text-3xl bg-gray-800 bg-opacity-50 rounded-full p-2 hover:bg-opacity-75 focus:outline-none"
+            onClick={nextSlide}
+            aria-label="Next slide"
+          >
+            &#10095;
+          </button>
+          {/* Indicators */}
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+            {images.map((_, index) => (
+              <button
+                key={index}
+                className={`w-3 h-3 rounded-full ${index === currentSlide ? 'bg-indigo-600' : 'bg-gray-400'}`}
+                onClick={() => setCurrentSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </>
       )}
     </div>

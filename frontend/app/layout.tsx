@@ -4,7 +4,7 @@ import "./globals.css";
 import Navbar from './../components/navbar/page'
 import { Toaster } from "react-hot-toast";
 import { AppProvider } from "./../components/AppContext"
-
+import Footer from './../components/layout/Footer'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,14 +20,16 @@ export default function RootLayout({
 }>) {
   
   return (
-    <html lang="en">
+    <html lang="en" className="smooth-scroll">
       <AppProvider>
       
       <body className={inter.className} >
       <Toaster position="top-right" reverseOrder={false} />
         <Navbar />
-        {children}</body>
+        {children}
+        <Footer /></body>
         </AppProvider>
+        
     </html>
   );
 }
