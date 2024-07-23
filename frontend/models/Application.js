@@ -59,6 +59,11 @@ const applicationSchema = new Schema({
     required: true,
     trim: true
   },
+  status: {
+    type: String,
+    enum: ['in progress', 'rejected', 'successful'],
+    default: 'in progress'
+  }
 }, {
   timestamps: true
 });

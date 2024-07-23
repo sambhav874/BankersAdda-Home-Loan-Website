@@ -2,14 +2,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { CartContext } from "../AppContext";
+
 import ShoppingCart from './../icons/ShoppingCart';
 
 const Navbar = () => {
   const { data: session, status } = useSession();
-  const { cartProducts } = useContext(CartContext);
-  const { products } = useContext(CartContext);
-  console.log(products); // Access products from context
+  
   const userData = session?.user;
   let userName = userData?.name || userData?.email;
   if (userName && userName.includes(" ")) {
@@ -60,8 +58,8 @@ const Navbar = () => {
         <Link href="/about-us" className="text-gray-700 hover:text-indigo-500 font-medium">
           About Us
         </Link>
-        <Link href="/news" className="text-gray-700 hover:text-indigo-500 font-medium">
-          News
+        <Link href="/blogs" className="text-gray-700 hover:text-indigo-500 font-medium">
+          Blogs
         </Link>
         <Link href="/loan-apply" className="text-gray-700 hover:text-indigo-500 font-medium">
           Apply Loan
@@ -76,14 +74,7 @@ const Navbar = () => {
             >
               Contact Us 
             </Link>
-        <Link href="/cart" className="relative text-gray-700 hover:text-indigo-500 font-medium">
-          <ShoppingCart />
-          {cartProducts.length > 0 && (
-            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full p-1">
-              {cartProducts.length}
-            </span>
-          )}
-        </Link>
+        
       </div>
 
       <div className="flex items-center space-x-4">
@@ -156,11 +147,11 @@ const Navbar = () => {
               About Us
             </Link>
             <Link
-              href="/news"
+              href="/blogs"
               className="block text-gray-700 hover:text-indigo-500 font-medium"
               onClick={handleLinkClick}
             >
-              News
+              Blogs
             </Link>
             <Link
               href="/loan-apply"
@@ -183,18 +174,7 @@ const Navbar = () => {
             >
               Contact Us
             </Link>
-            <Link
-              href="/cart"
-              className="block text-gray-700 hover:text-indigo-500 font-medium"
-              onClick={handleLinkClick}
-            >
-              Cart
-              {cartProducts.length > 0 && (
-                <span className="relative ml-2 bg-red-500 text-white text-xs rounded-full p-1">
-                  {cartProducts.length}
-                </span>
-              )}
-            </Link>
+            
             <Link
               href="/login"
               className="block text-gray-700 hover:text-indigo-500 font-medium"
