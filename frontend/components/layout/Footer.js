@@ -36,6 +36,9 @@ const Footer = () => {
           <Link href="/query" className="text-gray-700 hover:text-indigo-500 font-medium">
             Contact Us
           </Link>
+          <Link href="/why-choose-us" className="text-gray-700 hover:text-indigo-500 font-medium">
+            Why Choose Us
+          </Link>
         </div>
 
         {/* Social Media Links */}

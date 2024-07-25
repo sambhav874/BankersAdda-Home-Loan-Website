@@ -4,88 +4,111 @@ import Link from 'next/link';
 
 const AboutUs = () => {
   return (
-    <div className="font-sans bg-gray-100 min-h-screen">
-      <main className="container mx-auto p-4">
+    <div className="font-sans bg-gray-800 min-h-screen text-gray-100">
+      <main className="container mx-auto px-4 py-6">
         <section className="about-us text-center">
           {/* Header Image */}
           <div 
-            className="header-image bg-cover bg-center py-24 text-center" 
-            style={{ backgroundImage: "url('/path/to/header-image.jpg')" }}
+            className="header-image bg-cover bg-center py-48 text-center relative"
+            style={{ backgroundImage: "url('/images/6a38b575-e094-462c-8e21-dccb94077a0b.png')" }}
           >
-            <h1 className="text-5xl font-bold text-white drop-shadow-lg">About Us</h1>
+            <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+            <h1 className="text-7xl font-extrabold text-white relative z-10 drop-shadow-xl hover:drop-shadow-2xl transition-shadow duration-300">
+              About Us
+            </h1>
           </div>
           
           {/* Content */}
-          <div className="content bg-white p-8 shadow-lg rounded-lg mx-auto mt-[-80px] relative z-10 max-w-3xl">
-            <h2 className="text-3xl font-semibold text-gray-800 mb-4">Loan Provider Name</h2>
-            <p className="text-lg text-gray-700 mb-6">Loan Provider is the largest Mortgage Lender, helping families achieve the dream of owning a home.</p>
+          <div className="content bg-gray-900 p-12 shadow-2xl rounded-lg mx-auto mt-[-100px] relative z-10 max-w-5xl">
+            <h2 className="text-5xl font-bold text-white mb-8 drop-shadow-md hover:drop-shadow-lg transition-shadow duration-300">
+              Our Story
+            </h2>
+            <p className="text-xl text-gray-300 mb-10">
+              At Loan Provider, we are committed to helping families achieve their dreams of home ownership. As a leading mortgage lender, we offer a wide range of financial solutions to meet diverse needs.
+            </p>
             
-            <h2 className="text-3xl font-semibold text-gray-800 mb-4">Our Values</h2>
-            <ul className="list-disc list-inside text-lg text-gray-700 mb-6 pl-5">
-              <li>Trust</li>
-              <li>Transparency</li>
-              <li>Integrity</li>
-              <li>Excellence</li>
-            </ul>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              <div>
+                <h2 className="text-4xl font-bold text-white mb-6 drop-shadow-md hover:drop-shadow-lg transition-shadow duration-300">
+                  Our Core Values
+                </h2>
+                <ul className="list-disc list-inside text-lg text-gray-300 mb-8 pl-6">
+                  <li className="font-bold hover:text-blue-400 transition-colors duration-300">Trust</li>
+                  <li className="font-bold hover:text-blue-400 transition-colors duration-300">Transparency</li>
+                  <li className="font-bold hover:text-blue-400 transition-colors duration-300">Integrity</li>
+                  <li className="font-bold hover:text-blue-400 transition-colors duration-300">Excellence</li>
+                </ul>
+              </div>
+              
+              <div>
+                <h2 className="text-4xl font-bold text-white mb-6 drop-shadow-md hover:drop-shadow-lg transition-shadow duration-300">
+                  Benefits for You
+                </h2>
+                <ul className="list-disc list-inside text-lg text-gray-300 mb-8 pl-6">
+                  <li className="font-bold hover:text-blue-400 transition-colors duration-300">Wide Product Range</li>
+                  <li className="font-bold hover:text-blue-400 transition-colors duration-300">Interest Calculation on Daily Reducing Balance</li>
+                  <li className="font-bold hover:text-blue-400 transition-colors duration-300">Overdraft Facility</li>
+                  <li className="font-bold hover:text-blue-400 transition-colors duration-300">Low Interest Rates</li>
+                  <li className="font-bold hover:text-blue-400 transition-colors duration-300">Low Processing Fees</li>
+                  <li className="font-bold hover:text-blue-400 transition-colors duration-300">No Hidden Costs</li>
+                  <li className="font-bold hover:text-blue-400 transition-colors duration-300">No Pre-payment Penalty</li>
+                </ul>
+              </div>
+            </div>
             
-            <h2 className="text-3xl font-semibold text-gray-800 mb-4">Value to Customers</h2>
-            <ul className="list-disc list-inside text-lg text-gray-700 mb-6 pl-5">
-              <li>Wide Product Range</li>
-              <li>Interest Calculation on Daily Reducing Balance</li>
-              <li>Overdraft Facility available</li>
-              <li>Low Interest Rates</li>
-              <li>Low Processing Fees</li>
-              <li>No Hidden Costs</li>
-              <li>No Pre-payment Penalty</li>
-            </ul>
-            
-            <h2 className="text-3xl font-semibold text-gray-800 mb-4">Our Presence</h2>
-            <p className="text-lg text-gray-700">We have over 24,000 branches and a 1600+ member strong dedicated Sales Team.</p>
+            <h2 className="text-4xl font-bold text-white mb-6 drop-shadow-md hover:drop-shadow-lg transition-shadow duration-300">
+              Our Reach
+            </h2>
+            <p className="text-lg text-gray-300">
+              With over 24,000 branches and a dedicated team of 1,600+ professionals, we are committed to delivering exceptional service across the country.
+            </p>
           </div>
           
           {/* Features */}
-          <div className="features text-center bg-white p-8 shadow-lg rounded-lg mt-8 max-w-3xl mx-auto">
-            <h2 className="text-3xl font-semibold text-gray-800 mb-6">Our Features & Benefits</h2>
-            <div className="feature-icons flex flex-wrap justify-center gap-8">
-              <div className="feature-item w-full sm:w-1/2 md:w-1/3 lg:w-1/5 text-center mb-6">
-                <div className="text-blue-500 mb-3">
-                  <svg className="mx-auto" width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <div className="features text-center bg-gray-900 p-12 shadow-2xl rounded-lg mt-12 max-w-5xl mx-auto">
+            <h2 className="text-5xl font-bold text-white mb-10 drop-shadow-md hover:drop-shadow-lg transition-shadow duration-300">
+              Our Key Features & Benefits
+            </h2>
+            <div className="feature-icons grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
+              <div className="feature-item text-center mb-8 transform transition-transform duration-300 hover:scale-110 hover:shadow-lg">
+                <div className="text-blue-400 mb-4">
+                  <svg className="mx-auto" width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 0L14.9 7.6H22.8L16.4 12.4L19.3 20L12 15.2L4.7 20L7.6 12.4L1.2 7.6H9.1L12 0Z" fill="currentColor"/>
                   </svg>
                 </div>
-                <p className="text-lg text-gray-700">Packages of exclusive benefits</p>
+                <p className="text-xl text-gray-300 font-bold hover:text-blue-400 transition-colors duration-300">Exclusive Benefit Packages</p>
               </div>
-              <div className="feature-item w-full sm:w-1/2 md:w-1/3 lg:w-1/5 text-center mb-6">
-                <div className="text-blue-500 mb-3">
-                  <svg className="mx-auto" width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <div className="feature-item text-center mb-8 transform transition-transform duration-300 hover:scale-110 hover:shadow-lg">
+                <div className="text-blue-400 mb-4">
+                  <svg className="mx-auto" width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 0L14.9 7.6H22.8L16.4 12.4L19.3 20L12 15.2L4.7 20L7.6 12.4L1.2 7.6H9.1L12 0Z" fill="currentColor"/>
                   </svg>
                 </div>
-                <p className="text-lg text-gray-700">Low Interest rates. Interest calculation on daily reducing balance.</p>
+                <p className="text-xl text-gray-300 font-bold hover:text-blue-400 transition-colors duration-300">Competitive Interest Rates. Daily Reducing Balance Calculation.</p>
               </div>
-              <div className="feature-item w-full sm:w-1/2 md:w-1/3 lg:w-1/5 text-center mb-6">
-                <div className="text-blue-500 mb-3">
-                  <svg className="mx-auto" width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <div className="feature-item text-center mb-8 transform transition-transform duration-300 hover:scale-110 hover:shadow-lg">
+                <div className="text-blue-400 mb-4">
+                  <svg className="mx-auto" width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 0L14.9 7.6H22.8L16.4 12.4L19.3 20L12 15.2L4.7 20L7.6 12.4L1.2 7.6H9.1L12 0Z" fill="currentColor"/>
                   </svg>
                 </div>
-                <p className="text-lg text-gray-700">Home loan also available as an overdraft. Optimally utilize your surplus funds.</p>
+                <p className="text-xl text-gray-300 font-bold hover:text-blue-400 transition-colors duration-300">Flexible Overdraft Options for Home Loans. Optimal Use of Funds.</p>
               </div>
-              <div className="feature-item w-full sm:w-1/2 md:w-1/3 lg:w-1/5 text-center mb-6">
-                <div className="text-blue-500 mb-3">
-                  <svg className="mx-auto" width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <div className="feature-item text-center mb-8 transform transition-transform duration-300 hover:scale-110 hover:shadow-lg">
+                <div className="text-blue-400 mb-4">
+                  <svg className="mx-auto" width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 0L14.9 7.6H22.8L16.4 12.4L19.3 20L12 15.2L4.7 20L7.6 12.4L1.2 7.6H9.1L12 0Z" fill="currentColor"/>
                   </svg>
                 </div>
-                <p className="text-lg text-gray-700">Low Processing charges. No hidden costs.</p>
+                <p className="text-xl text-gray-300 font-bold hover:text-blue-400 transition-colors duration-300">Low Processing Charges. Transparent Costs.</p>
               </div>
-              <div className="feature-item w-full sm:w-1/2 md:w-1/3 lg:w-1/5 text-center mb-6">
-                <div className="text-blue-500 mb-3">
-                  <svg className="mx-auto" width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <div className="feature-item text-center mb-8 transform transition-transform duration-300 hover:scale-110 hover:shadow-lg">
+                <div className="text-blue-400 mb-4">
+                  <svg className="mx-auto" width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 0L14.9 7.6H22.8L16.4 12.4L19.3 20L12 15.2L4.7 20L7.6 12.4L1.2 7.6H9.1L12 0Z" fill="currentColor"/>
                   </svg>
                 </div>
-                <p className="text-lg text-gray-700">No Prepayment penalties. Reduce your interest burden by prepaying the loan.</p>
+                <p className="text-xl text-gray-300 font-bold hover:text-blue-400 transition-colors duration-300">No Prepayment Penalties. Reduce Your Loan Burden Easily.</p>
               </div>
             </div>
           </div>

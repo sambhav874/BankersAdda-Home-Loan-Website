@@ -72,6 +72,9 @@ const Navbar = () => {
           <Link href="/query" className="text-white hover:text-gray-300">
             Contact Us
           </Link>
+          <Link href="/why-choose-us" className="text-white hover:text-gray-300">
+            Why Choose Us
+          </Link>
         </div>
 
         <div className="flex items-center space-x-4">
@@ -179,6 +182,13 @@ const Navbar = () => {
               onClick={handleLinkClick}
             >
               Contact Us
+            </Link>
+            <Link
+              href="/why-choose-us"
+              className="block text-gray-700 hover:text-gray-500 font-medium"
+              onClick={handleLinkClick}
+            >
+              Why Choose Us
             </Link>
             {status === "authenticated" && (
               <>
