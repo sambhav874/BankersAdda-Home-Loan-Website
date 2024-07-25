@@ -1,0 +1,49 @@
+/* styles.css */
+
+/* Container for the bars */
+.bars-container {
+    display: flex;
+    justify-content: center; /* Space bars evenly */
+    align-items: flex-end;
+    height: 500px; /* Adjust height as needed */
+    width: 100%;
+  }
+  
+  /* Individual bar styling */
+  .bar {
+    width: 60px; /* Adjust width as needed */
+    transform-origin: bottom;
+    border-radius: 5px; /* Optional: rounded corners */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Shortest bar */
+  .bar-1 {
+    height: 150px; /* Initial height */
+    background-color: #4a90e2; /* Blue color */
+  }
+  
+  /* Middle bar */
+  .bar-2 {
+    height: 250px; /* Initial height */
+    background-color: #50e3c2; /* Teal color */
+  }
+  
+  /* Tallest bar */
+  .bar-3 {
+    height: 350px; /* Initial height */
+    background-color: #f5a623; /* Orange color */
+  }
+  
+  /* New tallest bar */
+  .bar-4 {
+    height: 450px; /* Initial height */
+    background-color: #9b59b6; /* Purple color */
+  }
+  
+  /* Hover effect and shadow */
+  .bar:hover {
+    transform: scaleY(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  

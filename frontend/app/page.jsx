@@ -1,3 +1,4 @@
+// Home Component (Home.js)
 'use client';
 import React, { useEffect, useState } from 'react';
 import Carousel from '../components/layout/Carousel';
@@ -39,27 +40,23 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-gray-200 flex flex-col items-center">
-      <header className="w-full bg-gray-800 py-8 text-white text-center">
-        <div className="text-6xl font-light mb-4">
-          Grow More Loans
-        </div>
-      </header>
+    <main className="min-h-screen bg-gray-800 flex flex-col pt-10 items-center">
+      
       
       <Carousel images={images} />
-
-      <section className="px-8 py-12 text-center bg-gray-100 shadow-lg rounded-lg w-full max-w-7xl my-12">
-        <h2 className="text-4xl font-semibold text-gray-800 mb-6">Welcome to Grow More Loan</h2>
+<Rend />
+      <section className="px-8  text-center bg-gray-800  rounded-lg w-full max-w-7xl my-12">
+        <h2 className="text-4xl font-semibold text-gray-400 mb-6">Welcome to Banker's Adda</h2>
         <p className="text-lg text-gray-700 mb-8">Your trusted partner for all types of loans</p>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 bg-gray-800 lg:grid-cols-3 gap-8 justify-items-center">
           {loans.map((loan) => (
             <LoanCard key={loan._id} loan={loan} />
           ))}
         </div>
       </section>
 
-      <Rend />
+      
     </main>
   );
 }

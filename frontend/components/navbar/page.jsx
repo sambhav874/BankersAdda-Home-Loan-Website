@@ -50,7 +50,7 @@ const Navbar = () => {
     <nav className="bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-lg">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <Link href="/" className="text-white text-2xl font-bold">
-          Grow More Loans
+          Banker's Adda
         </Link>
 
         <div className="hidden md:flex space-x-6">

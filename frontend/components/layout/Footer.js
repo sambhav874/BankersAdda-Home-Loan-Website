@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="bg-white shadow-lg p-6 mt-10">
+    <footer className="bg-white shadow-lg p-6 ">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
         {/* Logo or Branding */}
         <div className="flex flex-col items-center md:items-start">
@@ -12,7 +12,7 @@ const Footer = () => {
             YourLogo
           </Link>
           <p className="text-gray-500 text-sm text-center md:text-left">
-            &copy; {new Date().getFullYear()} Your Company. All rights reserved.
+            &copy; {new Date().getFullYear()} Banker's Adda. All rights reserved.
           </p>
         </div>
 
