@@ -37,13 +37,15 @@ const LoanApply = () => {
 
       {/* Available Loans Section */}
       <h1 className="text-3xl font-bold text-center mb-8">Available Loans</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="flex md:flex-row flex-col justify-center items-center gap-8">
         {loans.length > 0 ? (
           loans.map((loan) => (
-            <LoanCard key={loan._id} loan={loan} />
+            <div key={loan._id} className="  p-4">
+              <LoanCard loan={loan} />
+            </div>
           ))
         ) : (
-          <p className="text-center text-gray-600">No loans available at the moment. Please check back later.</p>
+          <p className="text-center text-gray-600 w-full">No loans available at the moment. Please check back later.</p>
         )}
       </div>
     </div>

@@ -16,11 +16,11 @@ const BlogsPage = () => {
   }, []);
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
-      <h1 className="text-5xl font-extrabold text-gray-900 mb-12 text-center">Our Latest Blogs</h1>
+    <div className="p-8 bg-gray-800 min-h-screen">
+      <h1 className="text-5xl font-extrabold text-gray-200 mb-12 text-center">Our Latest Blogs</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {blogs.map(blog => (
-          <div key={blog._id} className="bg-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-2xl border border-gray-200">
+          <div key={blog._id} className="bg-gray-900 p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-2xl border border-gray-200">
             {blog.image && (
               <img src={blog.image} alt={blog.title} className="w-full h-60 object-cover rounded-t-lg mb-4" />
             )}

@@ -34,17 +34,17 @@ const Applications = () => {
     .catch((error) => console.error(error));
   };
 
-  console.log(applications);
+
 
   return (
     <>
       <AdminTabs isAdmin={data.admin} />
-      <div className="max-w-4xl mx-auto p-4 pt-6 md:p-6 lg:p-12">
-        <h1 className="text-3xl font-bold mb-4">Applications</h1>
+      <div className="max-w-5xl mx-auto p-4 pt-6 md:p-6 lg:p-12">
+        <h1 className="text-5xl font-bold mb-4">Applications</h1>
         <ul className="divide-y divide-gray-200">
           {applications.length > 0 ? (
             applications.map((application) => (
-              <li key={application._id} className="py-6 bg-gray-100 m-4 p-6 rounded-lg shadow-md hover:bg-gray-200 transition duration-200">
+              <li key={application._id} className="py-6  m-8 bg-slate-900 text-white p-6 hover:text-black rounded-lg shadow-md hover:bg-white transition duration-200">
                 <div className="flex items-center mb-4">
                   <img src={application.image} alt={application.name} className="w-16 h-16 rounded-full mr-6" />
                   <h2 className="text-xl font-bold">{application.name}</h2>
@@ -78,19 +78,14 @@ const Applications = () => {
                   <p className="w-full md:w-1/3 lg:w-1/4 pr-4 mb-2">
                     <span className="text-gray-600 font-medium">Identity Proof Type:</span> {application.identityProofType}
                   </p>
-                  <div className="w-full md:w-1/3 lg:w-1/4 pr-4 mb-2">
-                    <span className="text-gray-600 font-medium">Identity Proof File:</span>
-                    <a href={application.identityProofFile} className="text-blue-500 hover:underline ml-1" target="_blank" rel="noopener noreferrer">
-                      View File
-                    </a>
-                  </div>
+                  
                 </div>
                 <div className="flex items-center">
                   <label className="text-gray-600 font-medium mr-2">Status:</label>
                   <select
                     value={application.status}
                     onChange={(e) => handleStatusChange(application._id, e.target.value)}
-                    className="p-2 border rounded"
+                    className="p-2 border bg-white text-black rounded"
                   >
                     <option value="in progress">In Progress</option>
                     <option value="rejected">Rejected</option>

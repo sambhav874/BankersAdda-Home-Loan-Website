@@ -39,6 +39,7 @@ const QueriesPage = () => {
       console.error('Error updating query:', error);
     }
   };
+
   const { loading, data } = useProfile();
 
   if (loading) {
@@ -51,28 +52,30 @@ const QueriesPage = () => {
 
   return (
     <>
-    <AdminTabs isAdmin={data.admin} />
-    <section className="mx-auto max-w-[80%] m-8 text-center text-white ">
-    
-      <div className="m-4">
-        <div className="text-2xl font-bold mb-4">Queries</div>
-        {queries.map(query => (
-          <div key={query._id} className="mb-4 p-4 border bg-slate-300 bg-opacity-30 rounded-md">
-            <p className="font-semibold">Email: {query.userEmail}</p>
-            <p className="mt-2">Query: {query.query}</p>
-            <label className="inline-flex items-center mt-2">
-              <input
-                type="checkbox"
-                className="form-checkbox h-5 w-5 text-blue-600"
-                checked={query.isAnswered}
-                onChange={(e) => handleCheckboxChange(query._id, e.target.checked)}
-              />
-              <span className="ml-2 text-sm">Is Answered?</span>
-            </label>
-          </div>
-        ))}
-      </div>
-    </section>
+      <AdminTabs isAdmin={data.admin} />
+      <section className="mx-auto max-w-screen-lg p-8 sm:p-6 lg:p-8 text-white">
+        <h1 className="text-3xl font-extrabold mb-6 text-center">Queries</h1>
+        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {queries.map(query => (
+            <div
+              key={query._id}
+              className="bg-slate-700 bg-opacity-70 p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-slate-600"
+            >
+              <p className="text-lg font-semibold">Email: {query.userEmail}</p>
+              <p className="mt-2 text-md">Query: {query.query}</p>
+              <label className="inline-flex items-center mt-4">
+                <input
+                  type="checkbox"
+                  className="form-checkbox h-6 w-6 text-blue-400"
+                  checked={query.isAnswered}
+                  onChange={(e) => handleCheckboxChange(query._id, e.target.checked)}
+                />
+                <span className="ml-2 text-base font-medium">Is Answered?</span>
+              </label>
+            </div>
+          ))}
+        </div>
+      </section>
     </>
   );
 };

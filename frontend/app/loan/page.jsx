@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import EditableImage from '../../components/layout/EditableImage';
@@ -102,86 +102,84 @@ const CreateLoan = () => {
     return "Not an admin.";
   }
 
-  return (<>
-    <AdminTabs isAdmin={data.admin} />
-    <div className="min-h-screen flex items-center justify-center bg-slate-900 py-12 px-4 sm:px-6 lg:px-8">
-      
-      <div className="max-w-screen-md w-full space-y-8 bg-slate-300 p-8 rounded-lg">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            {editLoanId ? 'Edit Loan' : 'Create a New Loan'}
-          </h2>
-        </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="rounded-md shadow-sm space-y-4">
-            <div>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                placeholder="Loan Name"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="appearance-none rounded-none block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              />
-            </div>
-            <div>
-              <textarea
-                id="description"
-                name="description"
-                placeholder="Loan Description"
-                required
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                className="appearance-none rounded-none block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              />
-            </div>
-            <div className='p-4 m-4'>
-              <EditableImage link={photo} setLink={setPhoto} />
-            </div>
-          </div>
+  return (
+    <>
+      <AdminTabs isAdmin={data.admin} />
+      <div className="min-h-screen flex items-center justify-center bg-slate-800 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl w-full space-y-8 bg-slate-800 p-8 rounded-lg shadow-lg">
           <div>
-            <button
-              type="submit"
-              disabled={loading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              {loading ? (editLoanId ? 'Updating...' : 'Creating...') : (editLoanId ? 'Update Loan' : 'Create Loan')}
-            </button>
+            <h2 className="mt-6 text-center text-4xl font-extrabold text-gray-100">
+              {editLoanId ? 'Edit Loan' : 'Create a New Loan'}
+            </h2>
           </div>
-        </form>
+          <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+            <div className="rounded-md shadow-sm space-y-4">
+              <div>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="Loan Name"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="appearance-none rounded-none block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-100 rounded-t-md text-lg font-semibold focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                />
+              </div>
+              <div>
+                <textarea
+                  id="description"
+                  name="description"
+                  placeholder="Loan Description"
+                  required
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  className="appearance-none rounded-none block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-100 rounded-b-md text-lg font-semibold focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                />
+              </div>
+              <div className='py-4 my-4 max-w-md mx-auto'>
+                <EditableImage link={photo} setLink={setPhoto} />
+              </div>
+            </div>
+            <div>
+              <button
+                type="submit"
+                disabled={loading}
+                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-transform transform hover:scale-105"
+              >
+                {loading ? (editLoanId ? 'Updating...' : 'Creating...') : (editLoanId ? 'Update Loan' : 'Create Loan')}
+              </button>
+            </div>
+          </form>
 
-        {loans.length > 0 && loans.map(loan => (
-          <div
-            key={loan._id}
-            className='bg-slate-100 p-4 m-2 rounded-lg'
-          >
-            <div className="grow text-black">
-              <h3 className="font-bold">{loan.name}</h3>
-              <p>{loan.description}</p>
+          {loans.length > 0 && loans.map(loan => (
+            <div
+              key={loan._id}
+              className='bg-slate-100 p-4 m-2 rounded-lg shadow-md transition-transform transform hover:scale-105 hover:shadow-xl'
+            >
+              <div className="text-black text-center">
+                <img src={loan.photo} alt={loan.name} className='w-1/2 h-auto mx-auto mb-4 object-cover rounded-lg' />
+                <h3 className="font-bold text-xl mb-2 hover:text-indigo-600">{loan.name}</h3>
+                <p className='text-gray-600 text-lg'>{loan.description}</p>
+              </div>
+              <div className="flex justify-end space-x-2 mt-2">
+                <button
+                  onClick={() => handleEdit(loan)}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-transform transform hover:scale-105"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => handleDelete(loan._id)}
+                  className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-transform transform hover:scale-105"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
-            <div className='w-72 h-48'>
-              <img src={loan.photo} alt={loan.name} className='w-full h-full object-cover' />
-            </div>
-            <div className="flex justify-end space-x-2 mt-2">
-              <button
-                onClick={() => handleEdit(loan)}
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => handleDelete(loan._id)}
-                className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
     </>
   );
 };

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import toast from 'react-hot-toast';
 import EditableImage from '../../components/layout/EditableImage';
-import AdminTabs from './../../components/layout/AdminTabs'
+import AdminTabs from './../../components/layout/AdminTabs';
 
 const Profile = () => {
   const { data: session, status } = useSession();
@@ -14,7 +14,7 @@ const Profile = () => {
   const [pincode, setPincode] = useState("");
   const [country, setCountry] = useState("");
   const [image, setImage] = useState('');
-  const [isAdmin , setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [profileFetched, setProfileFetched] = useState(false);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const Profile = () => {
           console.error("Error fetching profile data:", error);
         });
     }
-  }, [session , status]);
+  }, [session, status]);
 
   async function handleProfileInfoUpdate(ev) {
     ev.preventDefault();
@@ -85,51 +85,52 @@ const Profile = () => {
     return redirect("/login");
   }
 
-  return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <div className="max-w-md w-full mx-auto bg-white shadow-md rounded-lg p-8">
-        <AdminTabs  isAdmin={isAdmin} />
-        <div className="flex flex-col items-center">
+  return (<>
+    <AdminTabs isAdmin={isAdmin} />
+    <div className="min-h-screen bg-gray-800 flex items-center justify-center">
+      <div className="max-w-6xl md:max-w-full m-2 w-full mx-auto bg-gray-800 shadow-md rounded-lg p-8">
+        
+        <div className="flex flex-col m-12 items-center">
           <EditableImage link={image} setLink={setImage} />
           <form className="mt-4 w-full" onSubmit={handleProfileInfoUpdate}>
             <div className="mb-4">
-              <label htmlFor="userName" className="block text-gray-700 text-sm font-bold mb-2">First and Last Name:</label>
+              <label htmlFor="userName" className="block text-white text-lg font-bold mb-2 hover:text-gray-400">First and Last Name:</label>
               <input
                 id="userName"
                 type="text"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 bg-white text-black leading-tight focus:outline-none focus:shadow-outline hover:border-blue-500"
                 value={userName}
                 onChange={(ev) => setUserName(ev.target.value)}
                 placeholder="First and Last Name"
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Email:</label>
+              <label htmlFor="email" className="block text-white text-lg font-bold mb-2 hover:text-gray-400">Email:</label>
               <input
                 id="email"
                 type="email"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 bg-white text-black leading-tight focus:outline-none focus:shadow-outline hover:border-blue-500"
                 disabled={true}
                 value={session?.user?.email}
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="phoneNumber" className="block text-gray-700 text-sm font-bold mb-2">Phone Number:</label>
+              <label htmlFor="phoneNumber" className="block text-white text-lg font-bold mb-2 hover:text-gray-400">Phone Number:</label>
               <input
                 id="phoneNumber"
                 type="tel"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 bg-white text-black leading-tight focus:outline-none focus:shadow-outline hover:border-blue-500"
                 onChange={(ev) => setPhoneNumber(ev.target.value)}
                 value={phoneNumber}
                 placeholder="Phone Number"
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="streetAddress" className="block text-gray-700 text-sm font-bold mb-2">Street Address:</label>
+              <label htmlFor="streetAddress" className="block text-white text-lg font-bold mb-2 hover:text-gray-400">Street Address:</label>
               <input
                 id="streetAddress"
                 type="text"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 bg-white text-black leading-tight focus:outline-none focus:shadow-outline hover:border-blue-500"
                 onChange={(ev) => setStreetAddress(ev.target.value)}
                 value={streetAddress}
                 placeholder="Street Address"
@@ -137,22 +138,22 @@ const Profile = () => {
             </div>
             <div className="flex mb-4">
               <div className="w-1/2 mr-2">
-                <label htmlFor="pincode" className="block text-gray-700 text-sm font-bold mb-2">Pincode:</label>
+                <label htmlFor="pincode" className="block text-white text-lg font-bold mb-2 hover:text-gray-400">Pincode:</label>
                 <input
                   id="pincode"
                   type="text"
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="shadow appearance-none border rounded w-full py-2 px-3 bg-white text-black leading-tight focus:outline-none focus:shadow-outline hover:border-blue-500"
                   onChange={(ev) => setPincode(ev.target.value)}
                   value={pincode}
                   placeholder="Pincode"
                 />
               </div>
               <div className="w-1/2 ml-2">
-                <label htmlFor="city" className="block text-gray-700 text-sm font-bold mb-2">City:</label>
+                <label htmlFor="city" className="block text-white text-lg font-bold mb-2 hover:text-gray-400">City:</label>
                 <input
                   id="city"
                   type="text"
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="shadow appearance-none border rounded w-full py-2 px-3 bg-white text-black leading-tight focus:outline-none focus:shadow-outline hover:border-blue-500"
                   onChange={(ev) => setCity(ev.target.value)}
                   value={city}
                   placeholder="City"
@@ -160,11 +161,11 @@ const Profile = () => {
               </div>
             </div>
             <div className="mb-4">
-              <label htmlFor="country" className="block text-gray-700 text-sm font-bold mb-2">Country:</label>
+              <label htmlFor="country" className="block text-white text-lg font-bold mb-2 hover:text-gray-400">Country:</label>
               <input
                 id="country"
                 type="text"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 bg-white text-black leading-tight focus:outline-none focus:shadow-outline hover:border-blue-500"
                 onChange={(ev) => setCountry(ev.target.value)}
                 value={country}
                 placeholder="Country"
@@ -172,7 +173,7 @@ const Profile = () => {
             </div>
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline"
             >
               Save
             </button>
@@ -180,6 +181,7 @@ const Profile = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

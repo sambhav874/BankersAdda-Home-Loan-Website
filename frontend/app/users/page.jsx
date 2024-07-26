@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export default function UsersPage() {
   const [users, setUsers] = useState([]);
-  const { loading, data: profileData } = useProfile(); // Renamed 'user' to 'profileData'
+  const { loading, data: profileData } = useProfile();
 
   useEffect(() => {
     fetch('/api/users')
@@ -21,7 +21,6 @@ export default function UsersPage() {
       });
   }, []);
 
-  // Extract isAdmin from profileData safely
   const isAdmin = profileData?.admin;
 
   if (loading) return <p>Loading...</p>;
@@ -31,28 +30,38 @@ export default function UsersPage() {
   }
 
   return (
-    <div className="mt-8 max-w-2xl mx-auto">
+    <>
       <AdminTabs isAdmin={isAdmin} />
-      <h1>Users Page</h1>
-      <div className="mt-8">
-        {users?.length > 0 && users.map(user => (
-          <div className="bg-gray-300 p-2 m-2 flex rounded-lg gap-2 text-black items-center" key={user._id}>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 grow">
-              <div className="text-gray-700">
+      <div className="mt-8 max-w-6xl mx-auto px-4 sm:px-6 py-12 lg:px-8">
+        <h1 className="text-4xl font-extrabold text-gray-100 mb-6 text-center">Users Page</h1>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {users.length > 0 && users.map(user => (
+            <div
+              key={user._id}
+              className="bg-gray-800 bg-opacity-70 p-6 rounded-lg shadow-lg hover:shadow-xl transition-transform transform hover:scale-105"
+            >
+              <div className="text-gray-100 text-lg font-semibold">
                 {!!user.name ? (
                   <span>{user.name}</span>
                 ) : (
                   <span className="italic">No Name</span>
                 )}
               </div>
-              <span className="text-gray-600">{user.email}</span>
+              <div className="text-gray-300 mt-2 text-md">
+                {user.email}
+              </div>
+              <div className="mt-4">
+                <Link
+                  href={'/users/' + user._id}
+                  className="text-blue-500 hover:text-blue-400 font-medium"
+                >
+                  Edit
+                </Link>
+              </div>
             </div>
-            <div className="justify-end">
-              <Link href={'/users/' + user._id}>Edit</Link>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

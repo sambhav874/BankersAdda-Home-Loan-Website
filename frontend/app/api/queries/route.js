@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import nodemailer from "nodemailer";
 import { Queries } from "../../../models/Query";
+import { isAdmin } from "../auth/[...nextauth]/utils/isAdmin";
+import authOptions from "../auth/[...nextauth]/auth";
 
 export async function POST(req) {
   const { email, query } = await req.json();
@@ -38,11 +40,17 @@ export async function POST(req) {
   }
 }
 
-
-export async function GET() {
+export async function GET(req) {
   await mongoose.connect(process.env.MONGO_URI);
 
   try {
+    
+    const admin = await isAdmin();
+
+    if (!admin) {
+      return new Response(JSON.stringify({ error: 'Unauthorized access' }), { status: 403 });
+    }
+
     const queries = await Queries.find();
     return new Response(JSON.stringify(queries), { status: 200, headers: { 'Content-Type': 'application/json' } });
   } catch (error) {
@@ -52,19 +60,26 @@ export async function GET() {
 }
 
 export async function PUT(req) {
-    const { _id, isAnswered } = await req.json();
-  
-    await mongoose.connect(process.env.MONGO_URI);
-  
-    try {
-      const updatedQuery = await Queries.findByIdAndUpdate(_id, { isAnswered }, { new: true });
-      if (updatedQuery) {
-        return new Response(JSON.stringify(updatedQuery), { status: 200 });
-      } else {
-        return new Response(JSON.stringify({ error: 'Query not found' }), { status: 404 });
-      }
-    } catch (error) {
-      console.error("Error updating query:", error);
-      return new Response(JSON.stringify({ error: 'Error updating query' }), { status: 500 });
+  await mongoose.connect(process.env.MONGO_URI);
+
+  try {
+    
+    const admin = await isAdmin();
+
+    if (!admin) {
+      return new Response(JSON.stringify({ error: 'Unauthorized access' }), { status: 403 });
     }
+
+    const { _id, isAnswered } = await req.json();
+    const updatedQuery = await Queries.findByIdAndUpdate(_id, { isAnswered }, { new: true });
+
+    if (updatedQuery) {
+      return new Response(JSON.stringify(updatedQuery), { status: 200 });
+    } else {
+      return new Response(JSON.stringify({ error: 'Query not found' }), { status: 404 });
+    }
+  } catch (error) {
+    console.error("Error updating query:", error);
+    return new Response(JSON.stringify({ error: 'Error updating query' }), { status: 500 });
   }
+}

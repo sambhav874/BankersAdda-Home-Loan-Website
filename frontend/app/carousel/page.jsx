@@ -3,10 +3,13 @@ import React, { useState, useEffect } from "react";
 import EditableImage from "../../components/layout/EditableImage";
 import Image from "next/image";
 import { toast } from "react-hot-toast";
+import AdminTabs from "@/components/layout/AdminTabs";
+import { useProfile } from "@/components/useProfile";
 
 const Carousel = () => {
   const [image, setImage] = useState("");
   const [carouselImages, setCarouselImages] = useState([]);
+  const {loading , data} = useProfile();
 
   useEffect(() => {
     fetch("/api/carousel")
@@ -69,13 +72,16 @@ const Carousel = () => {
   };
 
   return (
-    <div className="max-w-4xl m-8 p-4 rounded-lg bg-slate-400">
+    <>
+    <AdminTabs isAdmin={data.admin}/>
+    <div className="max-w-5xl m-8 p-4 rounded-lg bg-slate-800">
       <h1 className="text-3xl font-bold text-center m-8">
         Upload Carousel Images
       </h1>
 
-      <div className="mb-4">
+      <div className="mb-4 ">
         <h2 className="text-lg font-bold mb-2">Image</h2>
+        
         <EditableImage link={image} setLink={uploadImage} />
         <div className="grid grid-cols-1 gap-4 mt-4">
           {carouselImages.map((carouselImage) => (
@@ -100,7 +106,7 @@ const Carousel = () => {
           ))}
         </div>
       </div>
-    </div>
+    </div></>
   );
 };
 

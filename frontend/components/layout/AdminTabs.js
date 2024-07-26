@@ -8,32 +8,64 @@ export default function AdminTabs({ isAdmin }) {
   const path = usePathname();
 
   return (
-    <div className="flex mx-auto justify-center gap-2 tabs bg-slate-700 items-center">
-      <Link className={path === "/profile" ? "active" : ""} href="/profile">
+    <div className="flex flex-wrap justify-center gap-4 p-4 bg-slate-900 rounded-lg shadow-lg">
+      <Link
+        href="/profile"
+        className={`px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 ${
+          path === "/profile" ? "bg-blue-600 text-white shadow-md" : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+        }`}
+      >
         Profile
       </Link>
       {isAdmin && (
         <>
           <Link
-            className={path === "/loan" ? "active" : ""}
             href="/loan"
+            className={`px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 ${
+              path === "/loan" ? "bg-blue-600 text-white shadow-md" : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+            }`}
           >
             Loan
           </Link>
-
           <Link
-            className={path === "/queries" ? "active" : ""}
             href="/queries"
+            className={`px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 ${
+              path === "/queries" ? "bg-blue-600 text-white shadow-md" : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+            }`}
           >
             Queries
           </Link>
-
-          <Link className={path.includes("users") ? "active" : ""} href="/users">
+          <Link
+            href="/users"
+            className={`px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 ${
+              path.includes("users") ? "bg-blue-600 text-white shadow-md" : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+            }`}
+          >
             Users
           </Link>
-
-          <Link className={path === "/orders" ? "active" : ""} href="/orders">
-            Orders
+          <Link
+            href="/applications"
+            className={`px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 ${
+              path === "/applications" ? "bg-blue-600 text-white shadow-md" : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+            }`}
+          >
+            Applications
+          </Link>
+          <Link
+            href="/blogs-mgm"
+            className={`px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 ${
+              path === "/blogs-mgm" ? "bg-blue-600 text-white shadow-md" : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+            }`}
+          >
+            Blogs
+          </Link>
+          <Link
+            href="/carousel"
+            className={`px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 ${
+              path === "/carousel" ? "bg-blue-600 text-white shadow-md" : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+            }`}
+          >
+            Carousel
           </Link>
         </>
       )}

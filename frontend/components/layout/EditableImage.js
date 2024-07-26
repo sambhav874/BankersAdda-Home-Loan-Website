@@ -58,14 +58,14 @@ export default function EditableImage({ link, setLink }) {
       {link && (
         <Image
           src={`${link}`}
-          className="w-full h-full rounded-lg mb-2"
+          className="w-64 h-full border-white border-4 rounded-lg mb-8"
           width={250}
           height={250}
           alt="User Avatar"
         />
       )}
       {!link && (
-        <div className="bg-gray-200 p-4 text-gray-500 rounded-lg mb-1 text-center">
+        <div className="bg-gray-200 p-4 text-gray-500  rounded-lg mb-1 text-center">
             No image
         </div>
       )}
@@ -76,7 +76,7 @@ export default function EditableImage({ link, setLink }) {
           onChange={handleFileChange}
         ></input>
         <span
-          className="block rounded-lg p-2 text-center border-gray-300 cursor-pointer border"
+          className="block rounded-lg p-2 text-center border-gray-300 hover:bg-white hover:text-black duration-500 cursor-pointer border"
           type="button"
         >
           Change Avatar

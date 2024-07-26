@@ -1,23 +1,23 @@
 'use client';
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
 const Footer = () => {
   return (
-    <footer className="bg-white shadow-lg p-6 ">
-      <div className="container mx-auto flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+    <footer className="bg-white shadow-lg p-6">
+      <div className="container mx-auto flex flex-col items-center space-y-6">
         {/* Logo or Branding */}
-        <div className="flex flex-col items-center md:items-start">
+        <div className="flex flex-col items-center">
           <Link href="/" className="text-gray-700 hover:text-indigo-500 font-bold text-2xl mb-2">
             YourLogo
           </Link>
-          <p className="text-gray-500 text-sm text-center md:text-left">
+          <p className="text-gray-500 text-sm text-center">
             &copy; {new Date().getFullYear()} Banker's Adda. All rights reserved.
           </p>
         </div>
 
         {/* Navigation Links */}
-        <div className="flex space-x-6">
+        <div className="flex flex-col md:flex-row md:space-x-6 text-center space-y-4 md:space-y-0">
           <Link href="/" className="text-gray-700 hover:text-indigo-500 font-medium">
             Home
           </Link>

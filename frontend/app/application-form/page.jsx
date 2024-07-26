@@ -1,7 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
-import FileUploader from './../../components/layout/FileUploader'; 
+import { useSession } from 'next-auth/react'; 
 import EditableImage from '@/components/layout/EditableImage'; // Assuming EditableImage is in the same directory
 
 const ApplicationForm = () => {
@@ -17,7 +16,7 @@ const ApplicationForm = () => {
   const [country, setCountry] = useState('');
   const [loanType, setLoanType] = useState('');
   const [identityProofType, setIdentityProofType] = useState('');
-  const [identityProofFile, setIdentityProofFile] = useState(null);
+  
 
   useEffect(() => {
     async function fetchData() {
@@ -36,7 +35,7 @@ const ApplicationForm = () => {
           setImage(data.image || '');
           setLoanType(data.loanType || '');
           setIdentityProofType(data.identityProofType || '');
-          setIdentityProofFile(data.identityProofFile || null);
+          
         } else {
           console.error('Error fetching profile data:', response.statusText);
         }
@@ -76,7 +75,7 @@ const ApplicationForm = () => {
       country,
       loanType,
       identityProofType,
-      identityProofFile,
+      
     };
 
     try {
@@ -98,8 +97,8 @@ const ApplicationForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center py-8">
-      <div className="w-full max-w-6xl bg-white shadow-lg rounded-lg p-8 flex">
+    <div className="min-h-screen bg-gray-800 flex items-center justify-center py-8">
+      <div className="w-full max-w-6xl bg-slate-800 shadow-lg rounded-lg p-8 items-center justify-center flex">
         <form onSubmit={handleFormSubmit} className="w-full flex flex-col lg:flex-row lg:space-x-8">
           {/* Left Side: Personal Information */}
           <div className="w-full lg:w-1/3 space-y-6">
@@ -237,12 +236,7 @@ const ApplicationForm = () => {
               </div>
             </div>
             {/* Bottom Column: PDF Upload */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Identity Proof Upload</span>
-              </label>
-              <FileUploader setFile={setIdentityProofFile} />
-            </div>
+          
             <button type="submit" className="btn btn-primary w-full">Submit Application</button>
           </div>
         </form>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useProfile } from './../../../components/useProfile';
+import { useProfile } from '../../../components/useProfile';
 import UserForm from '../../../components/layout/UserForm';
 import AdminTabs from '../../../components/layout/AdminTabs';
 import { useParams } from 'next/navigation';
@@ -11,13 +11,11 @@ export default function EditUserPage() {
   const [user, setUser] = useState(null);
   const { id } = useParams();
   const { loading, data: loggedInUser } = useProfile();
-  
 
   useEffect(() => {
     fetch('/api/profile?_id=' + id).then((res) => {
       res.json().then((userData) => {
         setUser(userData);
-        console.log(userData)
       });
     });
   }, [id]);
@@ -44,19 +42,22 @@ export default function EditUserPage() {
   }
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="text-center text-gray-500">Loading...</div>;
   }
 
   if (!isAdmin) {
-    return 'Not an admin';
+    return <div className="text-center text-red-500">Not an admin</div>;
   }
 
-  return (
-    <div className="mt-8 mx-auto max-w-3xl">
-      <AdminTabs isAdmin={isAdmin} />
-      <div className="mt-8">
+  return (<>
+    <AdminTabs isAdmin={isAdmin} />
+    <div className="mt-8 mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+      
+      <div className="mt-8 bg-gray-900 p-6 rounded-lg shadow-lg">
+        <h2 className="text-4xl font-bold text-white mb-4">Edit User</h2>
         <UserForm user={user} isAdmin={isAdmin} onSave={handleSaveButtonClick} />
       </div>
     </div>
+    </>
   );
 }

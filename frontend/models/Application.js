@@ -54,11 +54,7 @@ const applicationSchema = new Schema({
     enum: ['aadhar', 'pan', 'ration', 'passport', 'voter', 'others'], // Ensure value is one of these
     trim: true
   },
-  identityProofFile: {
-    type: String, // URL to the uploaded PDF
-    required: true,
-    trim: true
-  },
+  
   status: {
     type: String,
     enum: ['in progress', 'rejected', 'successful'],
