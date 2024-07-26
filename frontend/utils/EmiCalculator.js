@@ -42,7 +42,7 @@ const EMICalculator = () => {
   };
 
   return (
-    <div className="bg-gray-800 p-6 rounded-lg">
+    <div className="bg-gray-800 p-6 rounded-lg ">
       <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between">
         <div className="flex-1 lg:pr-8 mb-6 lg:mb-0">
           <div className="mb-4">

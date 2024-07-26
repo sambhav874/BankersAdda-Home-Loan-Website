@@ -34,10 +34,10 @@ const LoanDetails = () => {
 
   return (
     <div className="container mx-auto py-8 ">
-      <h1 className="text-3xl font-bold text-center mb-8">{loan.name}</h1>
-      <div className="bg-black p-6 rounded-lg shadow-lg">
-        <img src={loan.photo} alt={loan.name} className="w-full h-64 object-cover mb-6 rounded" />
-        <p className="text-gray-700 text-base mb-4">{loan.description}</p>
+      <h1 className="text-5xl font-bold text-center mb-8">{loan.name}</h1>
+      <div className="bg-gray-800 p-6  shadow-lg  rounded-xl">
+        <img src={loan.photo} alt={loan.name} className="w-full h-full object-cover p-12 " />
+        <p className="text-gray-200 text-3xl hover:text-white mb-4">{loan.description}</p>
       </div>
     </div>
   );
