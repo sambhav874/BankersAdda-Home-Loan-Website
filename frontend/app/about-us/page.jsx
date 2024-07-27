@@ -1,14 +1,17 @@
-'use client';
+
 import React from 'react';
-import Link from 'next/link';
+
+
 
 const AboutUs = () => {
+  
+  
   return (
     <div className="font-sans bg-gray-800 min-h-screen text-gray-100">
       <main className="container mx-auto py-6 px-1">
         <section className="about-us text-center">
           {/* Header Image */}
-          <div 
+          <div
             className="header-image bg-cover bg-center py-48 text-center relative"
             style={{ backgroundImage: "url('/images/6a38b575-e094-462c-8e21-dccb94077a0b.png')" }}
           >
@@ -142,27 +145,7 @@ const AboutUs = () => {
                   </svg>
                 </div>
                 <p className="text-base sm:text-lg md:text-xl text-gray-300 font-bold drop-shadow-md hover:text-blue-400 transition-colors duration-300">
-                  Personalized Financial Solutions
-                </p>
-              </div>
-              <div className="feature-item text-center mb-8 transform transition-transform duration-300 hover:scale-110 hover:shadow-lg">
-                <div className="text-blue-400 mb-4">
-                  <svg className="mx-auto" width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 0L14.9 7.6H22.8L16.4 12.4L19.3 20L12 15.2L4.7 20L7.6 12.4L1.2 7.6H9.1L12 0Z" fill="currentColor"/>
-                  </svg>
-                </div>
-                <p className="text-base sm:text-lg md:text-xl text-gray-300 font-bold drop-shadow-md hover:text-blue-400 transition-colors duration-300">
-                  Flexible Payment Options
-                </p>
-              </div>
-              <div className="feature-item text-center mb-8 transform transition-transform duration-300 hover:scale-110 hover:shadow-lg">
-                <div className="text-blue-400 mb-4">
-                  <svg className="mx-auto" width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 0L14.9 7.6H22.8L16.4 12.4L19.3 20L12 15.2L4.7 20L7.6 12.4L1.2 7.6H9.1L12 0Z" fill="currentColor"/>
-                  </svg>
-                </div>
-                <p className="text-base sm:text-lg md:text-xl text-gray-300 font-bold drop-shadow-md hover:text-blue-400 transition-colors duration-300">
-                  24/7 Customer Support
+                  Personalized Service
                 </p>
               </div>
               <div className="feature-item text-center mb-8 transform transition-transform duration-300 hover:scale-110 hover:shadow-lg">
@@ -175,7 +158,43 @@ const AboutUs = () => {
                   Easy Online Application
                 </p>
               </div>
+              <div className="feature-item text-center mb-8 transform transition-transform duration-300 hover:scale-110 hover:shadow-lg">
+                <div className="text-blue-400 mb-4">
+                  <svg className="mx-auto" width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 0L14.9 7.6H22.8L16.4 12.4L19.3 20L12 15.2L4.7 20L7.6 12.4L1.2 7.6H9.1L12 0Z" fill="currentColor"/>
+                  </svg>
+                </div>
+                <p className="text-base sm:text-lg md:text-xl text-gray-300 font-bold drop-shadow-md hover:text-blue-400 transition-colors duration-300">
+                  Fast Approvals
+                </p>
+              </div>
+              <div className="feature-item text-center mb-8 transform transition-transform duration-300 hover:scale-110 hover:shadow-lg">
+                <div className="text-blue-400 mb-4">
+                  <svg className="mx-auto" width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 0L14.9 7.6H22.8L16.4 12.4L19.3 20L12 15.2L4.7 20L7.6 12.4L1.2 7.6H9.1L12 0Z" fill="currentColor"/>
+                  </svg>
+                </div>
+                <p className="text-base sm:text-lg md:text-xl text-gray-300 font-bold drop-shadow-md hover:text-blue-400 transition-colors duration-300">
+                  Attractive Interest Rates
+                </p>
+              </div>
             </div>
+          </div>
+          
+          {/* Call to Action */}
+          <div className="cta text-center py-8 sm:py-12 md:py-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 sm:mb-8 md:mb-10 drop-shadow-md hover:drop-shadow-lg transition-shadow duration-300">
+              Ready to Get Started?
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-300 mb-6 sm:mb-8">
+              Contact us today to learn more about our mortgage solutions and how we can help you achieve your home ownership goals.
+            </p>
+            <a
+              href="tel:+919320600554"
+              className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-lg transition-colors duration-300"
+            >
+              Contact Us at +91 9320600554
+            </a>
           </div>
         </section>
       </main>

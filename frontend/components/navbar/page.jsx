@@ -1,4 +1,5 @@
-"use client";
+'use client'; // Ensure this is treated as a Client Component
+
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
@@ -13,20 +14,24 @@ const Navbar = () => {
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 768);
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
 
   useEffect(() => {
-    const handleResize = () => {
+    if (typeof window !== "undefined") {
       setIsLargeScreen(window.innerWidth >= 768);
-      if (window.innerWidth >= 768) {
-        setIsSidebarOpen(false);
-      }
-    };
 
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+      const handleResize = () => {
+        setIsLargeScreen(window.innerWidth >= 768);
+        setIsSidebarOpen(false);
+        setIsDropdownOpen(false);
+      };
+
+      window.addEventListener("resize", handleResize);
+
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }
   }, []);
 
   const toggleSidebar = () => {
@@ -196,7 +201,7 @@ const Navbar = () => {
 
         <div className={`m-2 md:flex items-center space-x-4 ${status === "authenticated" ? "space-x-6" : ""}`}>
           {status === "authenticated" ? (
-            <div className=" m-4 relative">
+            <div className="m-4 relative">
               <button
                 onClick={toggleDropdown}
                 className="text-white text-sm md:text-base lg:text-lg font-bold hover:text-gray-300"
