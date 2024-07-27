@@ -36,7 +36,7 @@ function Rend() {
             <div className="w-full md:w-1/2 text-center md:text-left">
               <h1 className="text-5xl font-bold mb-4 hover:text-gray-400 transition-colors duration-300">Bankers Adda</h1>
               <p className="mt-4 text-lg hover:text-gray-400 transition-colors duration-300">
-                Bankers Adda.com: We are one of India's largest Corporate DSA & fastest growing Loan Distribution Company in India. We  manage multiple Financial and Management Advisory Services and Accounting and Taxation and Compliances practices across India.
+                Bankers Adda.com: We are one of India s largest Corporate DSA & fastest growing Loan Distribution Company in India. We  manage multiple Financial and Management Advisory Services and Accounting and Taxation and Compliances practices across India.
               </p>
               <p className="mt-4 text-lg hover:text-gray-400 transition-colors duration-300">
               Bankers Adda is a DSA, having partnerships with more than 60+ leading Banks and NBFCs and Fintechs to offer loans across India.

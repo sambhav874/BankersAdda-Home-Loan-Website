@@ -29,7 +29,7 @@ const LoanApply = () => {
       {/* Apply Button and Guidelines */}
       <div className="text-center mb-12">
         <h2 className="text-2xl font-semibold mb-4">Ready to Apply for a Loan?</h2>
-        <p className="text-lg mb-6">If you're interested in applying for any of the loans listed below, simply click the button to start your application.</p>
+        <p className="text-lg mb-6">If you are interested in applying for any of the loans listed below, simply click the button to start your application.</p>
         <Link href="/application-form" className="inline-block bg-blue-800 text-white py-3 px-6 rounded-lg shadow-lg hover:bg-blue-700 transition-colors">
           Apply Here
         </Link>
