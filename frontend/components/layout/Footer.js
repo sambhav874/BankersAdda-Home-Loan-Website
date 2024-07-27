@@ -12,7 +12,7 @@ const Footer = () => {
             YourLogo
           </Link>
           <p className="text-gray-500 text-sm text-center">
-            &copy; {new Date().getFullYear()} Banker's Adda. All rights reserved.
+            &copy; {new Date().getFullYear()} Bankers Adda. All rights reserved.
           </p>
         </div>
 

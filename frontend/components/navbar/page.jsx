@@ -46,7 +46,7 @@ const Navbar = () => {
     <nav className={`bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-lg ${isLargeScreen ? "flex" : "block"}`}>
       <div className={`container mx-auto px-4 py-4 ${isLargeScreen ? "flex justify-between items-center" : ""}`}>
         <Link href="/" className="text-white text-2xl md:text-3xl font-bold hover:text-yellow-300 transition duration-300 mr-4">
-          Banker's Adda
+          Bankers Adda
         </Link>
 
         {isLargeScreen ? (

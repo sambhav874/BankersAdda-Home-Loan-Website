@@ -34,12 +34,12 @@ function Rend() {
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap items-center justify-between">
             <div className="w-full md:w-1/2 text-center md:text-left">
-              <h1 className="text-5xl font-bold mb-4 hover:text-gray-400 transition-colors duration-300">Banker's Adda</h1>
+              <h1 className="text-5xl font-bold mb-4 hover:text-gray-400 transition-colors duration-300">Bankers Adda</h1>
               <p className="mt-4 text-lg hover:text-gray-400 transition-colors duration-300">
-                Banker's Adda.com: We are one of India's largest Corporate DSA & fastest growing Loan Distribution Company in India. We  manage multiple Financial and Management Advisory Services and Accounting and Taxation and Compliances practices across India.
+                Bankers Adda.com: We are one of India's largest Corporate DSA & fastest growing Loan Distribution Company in India. We  manage multiple Financial and Management Advisory Services and Accounting and Taxation and Compliances practices across India.
               </p>
               <p className="mt-4 text-lg hover:text-gray-400 transition-colors duration-300">
-              Banker's Adda is a DSA, having partnerships with more than 60+ leading Banks and NBFCs and Fintechs to offer loans across India.
+              Bankers Adda is a DSA, having partnerships with more than 60+ leading Banks and NBFCs and Fintechs to offer loans across India.
               </p>
               <p className="mt-4 text-lg hover:text-gray-400 transition-colors duration-300">
                 We cater to Finance and Loan requirements such as Personal Loans, Business Loans, Home Loans, Mortgage Loans, Car And Vehicles Loans, Education Loans, Project Finance, Working Capital, Invoice Discounting, Bills Discounting, Supply Chain Finance, Revenue Based Financing (RBF), Venture Debt, Venture Capital.
