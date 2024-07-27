@@ -47,10 +47,6 @@ export async function GET(req) {
       return Response.json(loans);
     }
 
-    if (session?.user?.email) {
-      const loans = await Loan.find({ userEmail: session.user.email });
-      return Response.json(loans);
-    }
 
     return Response.json({ error: "Unauthorized access" }, { status: 403 });
   } catch (error) {
