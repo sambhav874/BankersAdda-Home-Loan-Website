@@ -26,7 +26,7 @@ const LoanApplicationProcess = () => {
             <h3 className="text-primary hover:text-black">Hear From Us In 1 Hour</h3>
             <p className="hover:text-black">Our telecaller executive will reach out to you.</p>
             <div className="card-actions justify-center mt-4">
-              <Image src='/images/Phone.png' alt="Phone Icon" width={64} height={64} className="text-white" />
+              <Image src='/images/1608790_phone_icon.png' alt="Phone Icon" width={64} height={64} className="text-black" />
             </div>
           </div>
         </div>
@@ -36,7 +36,7 @@ const LoanApplicationProcess = () => {
             <h3 className="text-primary hover:text-black">Get Approval</h3>
             <p className="hover:text-black">Once document submission is completed, you will get approval from us.</p>
             <div className="card-actions justify-center mt-4">
-              <Image src='/images/approval-icon.png' alt="Approval Icon" width={64} height={64} className="text-white" />
+              <Image src='/images/approval-icon.png' alt="Approval Icon" width={64} height={64} className="text-black" />
             </div>
           </div>
         </div>
