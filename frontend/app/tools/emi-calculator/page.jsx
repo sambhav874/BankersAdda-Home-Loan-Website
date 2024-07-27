@@ -1,4 +1,4 @@
-import EMICalculator from './../../../utils/EMICalculator';
+import EMICalculator from './../../../utils/EmiCalculator';
 
 const EMICalculatorPage = () => {
   return (
