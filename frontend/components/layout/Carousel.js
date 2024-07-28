@@ -31,9 +31,9 @@ const Carousel = ({ images }) => {
   }
 
   return (
-    <div className="relative w-[95%] max-w-7xl  mx-auto overflow-hidden rounded-lg shadow-lg bg-gray-800">
+    <div className="relative w-[95%] max-w-7xl mx-auto overflow-hidden rounded-lg shadow-lg bg-gray-800">
       {/* Carousel wrapper */}
-      <div className="relative h-[60vh] md:h-[80vh] overflow-hidden rounded-lg">
+      <div className="relative h-[50vh] md:h-[40vh] lg:h-[30vh] overflow-hidden rounded-lg">
         {images.map((slide, index) => (
           <div key={index} className={`absolute inset-0 transition-opacity duration-700 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}>
             <img src={slide} className="w-full h-full object-cover" alt={`Slide ${index + 1}`} />
