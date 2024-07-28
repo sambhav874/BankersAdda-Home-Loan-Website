@@ -42,10 +42,7 @@ export async function GET(req) {
       return Response.json(loan);
     }
 
-    if (admin) {
-      const loans = await Loan.find();
-      return Response.json(loans);
-    }
+   
 
 
     return Response.json({ error: "Unauthorized access" }, { status: 403 });
