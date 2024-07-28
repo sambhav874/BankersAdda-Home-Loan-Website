@@ -42,10 +42,10 @@ export async function GET(req) {
       return Response.json(loan);
     }
 
-   
 
-
-    return Response.json({ error: "Unauthorized access" }, { status: 403 });
+    const loans = await Loan.find();
+      return Response.json(loans);
+  
   } catch (error) {
     console.error("Error fetching loans:", error);
     return Response.json({ error: "An error occurred fetching the loans" }, { status: 500 });
