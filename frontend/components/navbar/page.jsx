@@ -50,9 +50,19 @@ const Navbar = () => {
   return (
     <nav className={`bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-lg ${isLargeScreen ? "flex" : "block"}`}>
       <div className={`container mx-auto px-4 py-4 ${isLargeScreen ? "flex justify-between items-center" : ""}`}>
-        <Link href="/" className="text-white text-2xl md:text-3xl font-bold hover:text-yellow-300 transition duration-300 mr-4">
-          Bankers Adda
-        </Link>
+        <div className="flex justify-between items-center w-full md:w-auto">
+          <Link href="/" className="text-white text-2xl md:text-3xl font-bold hover:text-yellow-300 transition duration-300 mr-4">
+            Bankers Adda
+          </Link>
+          {!isLargeScreen && (
+            <button
+              className="md:hidden text-white text-2xl font-bold hover:text-gray-300"
+              onClick={toggleSidebar}
+            >
+              ☰
+            </button>
+          )}
+        </div>
 
         {isLargeScreen ? (
           <div className="hidden md:flex md:space-x-6 lg:space-x-8">
@@ -80,12 +90,6 @@ const Navbar = () => {
           </div>
         ) : (
           <>
-            <button
-              className="md:hidden text-white text-2xl font-bold hover:text-gray-300"
-              onClick={toggleSidebar}
-            >
-              ☰
-            </button>
             {isSidebarOpen && (
               <div className="fixed inset-0 bg-gray-800 bg-opacity-70 z-50">
                 <div className="bg-white p-6 rounded-lg space-y-4 absolute top-16 left-4 right-4 max-w-sm">

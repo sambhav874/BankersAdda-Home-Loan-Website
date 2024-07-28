@@ -40,7 +40,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-gray-800 flex flex-col pt-10 items-center">
+    <main className=" bg-gray-800 flex flex-col pt-10 items-center">
       
       
       <Carousel images={images} />

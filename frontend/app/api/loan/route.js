@@ -42,7 +42,6 @@ export async function GET(req) {
       return Response.json(loan);
     }
 
-
     const loans = await Loan.find();
       return Response.json(loans);
   
